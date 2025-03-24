@@ -7,7 +7,7 @@ const Login = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        console.log(mobile, password, "after submit")
+        console.log(mobile, password, "aftersubmit")
     }
 
     return (
