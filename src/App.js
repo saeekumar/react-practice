@@ -6,6 +6,7 @@ import AppNavbar from './component/Navbar';
 import Footer from './component/Footer';
 import Signup from './pages/Signup';
 import Login from './pages/Login';
+import EmployeeList from './pages/EmployeeList';
 
 function App() {
   return (
@@ -17,6 +18,8 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/employees-list" element={<EmployeeList />} />
+
         </Routes>
       </div>
       <Footer />
