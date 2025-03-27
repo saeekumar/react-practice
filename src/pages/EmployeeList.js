@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Col, Container, Row, Table } from 'react-bootstrap'
 
 const EmployeeList = () => {
-    const [employeeList, setEmployeesList] = useState('')
+    const [employeeList, setEmployeeList] = useState('')
 
     useEffect(() => {
         console.log("called effect");
