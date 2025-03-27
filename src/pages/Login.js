@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React, { useState } from 'react'
 import { Container, Row, Col, Form, Button } from 'react-bootstrap'
 
@@ -5,9 +6,23 @@ const Login = () => {
     const [mobile, setMobile] = useState('');
     const [password, setPassword] = useState('');
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault()
         console.log(mobile, password, "aftersubmit")
+
+        try {
+            const resp = await axios.post("http://localhost:2000/auth/login", {
+                user_name: mobile,
+                password: password
+            })
+            console.log(resp.data, "resp");
+            alert(resp.data.message)
+        } catch (error) {
+            console.log(error.response.data, "error");
+            alert(error.response.data.message)
+
+        }
+
     }
 
     return (

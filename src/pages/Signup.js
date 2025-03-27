@@ -1,21 +1,44 @@
+import axios from 'axios';
 import { React, useState } from 'react'
 import { Form, Container, Row, Col, Button } from 'react-bootstrap'
 
 
 const Signup = () => {
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
     const [email, setEmail] = useState('');
     const [phone, setPhone] = useState('');
     const [password, setPassword] = useState('');
     const [confPassword, setConfPassword] = useState('');
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault()
 
         if (password !== confPassword) {
-            return alert("Password do not match")
+            alert("Password do not match")
+            return
         }
 
         console.log("updated values on submit", email, phone, password, confPassword);
+        try {
+            const resp = await axios.post("http://localhost:2000/employee",
+                {
+                    first_name: firstName,
+                    last_name: lastName,
+                    email_id: email,
+                    phone: phone,
+                    password: password
+                }
+            )
+            console.log(resp.data, "data");
+            alert(resp.data.message)
+        } catch (error) {
+            console.log(error.response.data, "error");
+            alert(error.response.data.message)
+
+
+        }
+
 
     }
 
@@ -27,6 +50,16 @@ const Signup = () => {
                     <Col md={6} className='mt-5'>
                         <h2  >Signup</h2>
                         <Form onSubmit={handleSubmit} >
+                            <Form.Group className="mb-3" controlId="emailControl">
+                                <Form.Label>First Name :</Form.Label>
+                                <Form.Control type="text" placeholder="Enter your first name" value={firstName} onChange={(e) => setFirstName(e.target.value)} />
+                            </Form.Group>
+
+                            <Form.Group className="mb-3" controlId="emailControl">
+                                <Form.Label>Last Name :</Form.Label>
+                                <Form.Control type="text" placeholder="Enter your last name" value={lastName} onChange={(e) => setLastName(e.target.value)} />
+                            </Form.Group>
+
                             {/* email */}
                             <Form.Group className="mb-3" controlId="emailControl">
                                 <Form.Label>Email address :</Form.Label>
